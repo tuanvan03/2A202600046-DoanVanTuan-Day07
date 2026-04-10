@@ -23,6 +23,11 @@ class KnowledgeBaseAgent:
         # TODO: retrieve chunks, build prompt, call llm_fn
         # raise NotImplementedError("Implement KnowledgeBaseAgent.answer")
         search_result = self.store.search(query=question, top_k=top_k)
+        # print(search_result)
+
+        for res in search_result:
+            print(res["content"])
+            print("--------------------------")
         if not search_result:
             return "Tôi xin lỗi, tôi không tìm thấy thông tin liên quan trong cơ sở kiến thức để trả lời câu hỏi này."
 
