@@ -1,8 +1,8 @@
 # Báo Cáo Lab 7: Embedding & Vector Store
 
-**Họ tên:** [Tên sinh viên]
-**Nhóm:** [Tên nhóm]
-**Ngày:** [Ngày nộp]
+**Họ tên:** Đoàn Văn Tuấn
+**Nhóm:** Nhóm 03 - E402
+**Ngày:** 10/4/2026
 
 ---
 
@@ -11,30 +11,30 @@
 ### Cosine Similarity (Ex 1.1)
 
 **High cosine similarity nghĩa là gì?**
-> *Viết 1-2 câu:*
+> Cosine similarity là điểm đánh giá độ tương đồng về mặt ngữ nghĩa giữa 2 câu, giá trị nằm trong khoảng [0, 1], càng gần 1 thì độ tương đồng càng cao và ngược lại. Sử dụng chỉ số này thì sẽ không quan tâm đến việc độ dài 2 câu có dài ngắn khác nhau, khác với việc sử dụng Euclidean Distance.
 
 **Ví dụ HIGH similarity:**
-- Sentence A:
-- Sentence B:
-- Tại sao tương đồng:
+- Sentence A: Tôi thích nuôi mèo.
+- Sentence B: Lan rất yêu quý động vật, đặc biệt là chó con hoặc mèo vàng.
+- Tại sao tương đồng: Có những động từ thể hiện sự yêu thích và cùng về yêu quý động vật còn cụ thể là mèo đều có trong cả 2 câu.
 
 **Ví dụ LOW similarity:**
-- Sentence A:
-- Sentence B:
-- Tại sao khác:
+- Sentence A: Bầu trời hôm nay xanh thế.
+- Sentence B: Con mèo nằm dưới gầm bàn.
+- Tại sao khác: Nói về 2 vấn đề hoàn toàn khác biệt.
 
 **Tại sao cosine similarity được ưu tiên hơn Euclidean distance cho text embeddings?**
-> *Viết 1-2 câu:*
+> Đầu tiên là vấn đề độ dài dữ liệu, đây là vấn đề quan trong nhất. Cosine similarity chỉ quan tâm đến hướng, dù một câu ngắn hay một câu dài mà nói về cùng một chủ đề thì 2 vectors đó vẫn sẽ cùng hướng. Tuy nhiên nếu 2 câu có cùng chủ đề mà dài ngắn khác nhau có 1 cái là một câu, 1 cái khác làm một đoạn thì khoảng cách của chúng sẽ rất xa nhau nếu sử dụng Euclide Distance. 
+> Thứ 2 là về tốc độ tính toán việc tính Cosine Similarity thực chất là phép tính tính vô hướng nếu 2 vectors này đều được chuẩn hóa về độ dài bằng 1.
 
 ### Chunking Math (Ex 1.2)
 
 **Document 10,000 ký tự, chunk_size=500, overlap=50. Bao nhiêu chunks?**
-> *Trình bày phép tính:*
-> *Đáp án:*
+> *Trình bày phép tính:* Sau đoạn thêm đầu tiên,thì mỗi đoạn sau chỉ cần thêm 450 ký tự nữa là đủ một chunk. Phép tính: 500 + 450 * x >= 10.000 => x = 21.1 => cộng thêm chunk đầu 22.1 => Làm tròn 23
+> *Đáp án:* 23
 
 **Nếu overlap tăng lên 100, chunk count thay đổi thế nào? Tại sao muốn overlap nhiều hơn?**
-> *Viết 1-2 câu:*
-
+> *Viết 1-2 câu:* Nếu overlap tăng lên thì số lượng chunk cũng tăng lên, muốn overlap để xác xuất chunk nắm giữ thông tin quan trọng sẽ nhiều hơn. Ví dụ khi ta chỉ cắt thông thường không overlap thì mỗi chunk chỉ mang dữ liệu của chunk đó nhưng nếu sử dụng overlap thì những chunk sau có thể mang cả dữ liệu của chunk trước đó xác suất mang thông tin quan trọng nhiều hơn.
 ---
 
 ## 2. Document Selection — Nhóm (10 điểm)
